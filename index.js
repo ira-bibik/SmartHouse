@@ -17,7 +17,7 @@ var modes = [
     new Mode("Делікатна", 800, 40, "Без віджиму")
 ]
 
-
+var modes2 = [modes[0], modes[1], modes[2], modes[3], modes[4]];
 
 // var wash = new Washer("LG", modes);
 // wash.on();
@@ -26,18 +26,13 @@ var modes = [
 
 var house = new SmartHouse("Home");
 
-house.addDevice(new Speaker("Apple", songs));
-house.addDevice(new Washer("LG", modes));
+house.addDevice(new Speaker("Apple", song2));
+house.addDevice(new Washer("LG", modes2));
 house.addDevice(new TV("SAMSUNG"));
 
 house.onAllDevices();
 house.getDeviceByName("LG").startWash("Хлопок");
 console.log(house.getDeviceByName("LG").getModes());
-
-// house.offAllDevices();
-
-// house.getDeviceByName("LG").startWash("Вручну");
-
 
 
 

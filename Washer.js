@@ -44,19 +44,19 @@ Washer.prototype.getModeByName = function (name) {
 
 Washer.prototype.startWash = function (name) {
     if (this.__checkIfOn()) {
-        var mode = this.getModeByName(name);
-        function wash(name, callback) {
-            console.log("Пральна машина запущена!")
-            var time = mode.getTime();
-            setTimeout(
-                function () {
-                    callback(name, time)
-                },
-                (time*100/3)
-            );
-        }
-        wash(name, function (name, time) {
-            console.log(name + " закінчено! " + time + "хв вийшло!");
-        })
+    var mode = this.getModeByName(name);
+    function wash(name, callback) {
+        console.log("Пральна машина запущена!")
+        var time = mode.getTime();
+        setTimeout(
+            function () {
+                callback(name, time)
+            },
+            (time*100/3)
+        );
     }
-};
+    wash(name, function (name, time) {
+        console.log(name + " закінчено! " + time + "хв вийшло!");
+    })
+}
+}; 

@@ -21,10 +21,5 @@ Device.prototype.off = function () {
 };
 
 Device.prototype.__checkIfOn = function () {
-    if (!this.__state) {
-        console.log("Девайс вимкнений!");
-        return false;
-    } else {
-        return true;
-    }
+    return this.__state;
 };

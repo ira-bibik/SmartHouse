@@ -28,15 +28,11 @@ SmartHouse.prototype.getDeviceByName = function (name) {
 };
 
 SmartHouse.prototype.deleteDeviceByName = function (name) {
-    //  this.__devices.forEach(function (device) {
-    //      if (device.getName() == name) {
-    //         var index = this.__devices.indexOf(device);
-    //         this.__devices.splice(index, 1);
-    //     }
-    // })
-    var element = this.getDeviceByName(name);
-    var index = this.__devices.indexOf(element);
-    this.__devices.splice(index, 1);
+    for (var i = 0; i < this.__devices.length; i++) {
+        if (this.__devices[i].getName() == name) {
+            this.__devices.splice(i, 1);
+        }
+    }
 };
 
 SmartHouse.prototype.offAllDevices = function () {

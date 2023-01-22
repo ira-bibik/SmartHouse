@@ -1,0 +1,44 @@
+"use strict";
+var songs = [
+    new Song("Stayin' Alive", "Bee Gees", "3:38"),
+    new Song("I Will Survive", "Gloria Gaynor", "4:57"),
+    new Song("AS IT WAS", "Harry Styles", "2:46"),
+    new Song("Blinding Lights", "The Weeknd", "4:22"),
+    new Song("BAD HABITS", "Ed Sheeran", "3:50")
+];
+
+var song2 = [songs[0], songs[3], songs[1]];
+
+var modes = [
+    new Mode("Хлопок", 120, 50, "600"),
+    new Mode("Бистро 30", 30, 80, "800"),
+    new Mode("Вручну", 100, 50, "Без віджиму"),
+    new Mode("Синтетика", 90, 25, "400"),
+    new Mode("Делікатна", 800, 40, "Без віджиму")
+]
+
+
+
+// var wash = new Washer("LG", modes);
+// wash.on();
+// wash.startWash("Хлопок");
+// console.log(wash.getModes());
+
+var house = new SmartHouse("Home");
+
+house.addDevice(new Speaker("Apple", songs));
+house.addDevice(new Washer("LG", modes));
+house.addDevice(new TV("SAMSUNG"));
+
+house.onAllDevices();
+house.getDeviceByName("LG").startWash("Хлопок");
+console.log(house.getDeviceByName("LG").getModes());
+
+// house.offAllDevices();
+
+// house.getDeviceByName("LG").startWash("Вручну");
+
+
+
+
+

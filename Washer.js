@@ -5,6 +5,7 @@ function Washer(name, modes) {
     if (this.__modesValid(modes)) {
         this.__modes = modes;
     }
+    this.__launch = false;
 }
 
 Washer.prototype = Object.create(Device.prototype);
@@ -20,43 +21,65 @@ Washer.prototype.__modesValid = function (array) {
 };
 
 Washer.prototype.getModes = function () {
-    if (this.__checkIfOn())
-        return this.__modes;
+    return this.__modes;
 };
 
 Washer.prototype.setModes = function (array) {
-    if (this.__modesValid(array) && this.__checkIfOn()) {
+    if (this.__modesValid(array)) {
         this.__modes = array;
     }
 };
 
 Washer.prototype.getModeByName = function (name) {
     var findMode = null;
-    if (this.__checkIfOn()) {
-        this.__modes.forEach(function (mode) {
-        if (mode.getName() == name) {
-            findMode = mode;
-        }
-    });
+    this.__modes.forEach(function (mode) {
+    if (mode.getName() == name) {
+        findMode = mode;
     }
+    });
     return findMode;
 };
 
-Washer.prototype.startWash = function (name) {
-    if (this.__checkIfOn()) {
-    var mode = this.getModeByName(name);
-    function wash(name, callback) {
-        console.log("Пральна машина запущена!")
-        var time = mode.getTime();
-        setTimeout(
-            function () {
-                callback(name, time)
-            },
-            (time*100/3)
-        );
-    }
-    wash(name, function (name, time) {
-        console.log(name + " закінчено! " + time + "хв вийшло!");
-    })
+Washer.prototype.launchOn = function () {
+    this.__launch = true;
 }
+
+Washer.prototype.launchOff = function () {
+    this.__launch = false;
+};
+
+Washer.prototype.startWash = function (name, callback) {
+    // if (this.__checkIfOn()) {
+    //     if (!this.__launch) {
+    //         this.__launch = true;
+    //         var mode = this.getModeByName(name);
+    //         function wash(name, callback) {
+    //             console.log("Пральна машина запущена!")
+    //             var time = mode.getTime();
+    //             setTimeout(
+    //                 function () {
+    //                     callback(name, time)
+    //                 },
+    //                 (time * 100 / 3)
+    //             );
+    //         }
+    //         wash(name, function (name, time) {
+    //             console.log(name + " закінчено! " + time + "хв вийшло!");
+    //         })
+    //     } else {
+    //         throw new Error("Девайс вже працює!");
+    //     }
+    // }
+
+    if (this.__checkIfOn() && !this.__launch) {
+        this.launchOn();
+        var mode = this.getModeByName(name);
+        console.log("Пральна машина запущена!");
+        var time = mode.getTime();
+        setTimeout(function () {
+            callback(name, time);
+        }, (time * 100) / 3);
+    }  else {
+        throw new Error();
+    }
 }; 

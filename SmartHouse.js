@@ -45,7 +45,7 @@ SmartHouse.prototype.offAllDevices = function () {
 
 SmartHouse.prototype.onAllDevices = function () {
     this.__devices.forEach(function (device) {
-        if (device.getState() === false) {
+        if (device.getState() == false) {
             device.on();
         }
     })

@@ -32,18 +32,23 @@ house.addDevice(new TV("SAMSUNG"));
 
 house.onAllDevices();
 try {
-    house.getDeviceByName("LG").startWash("Хлопок", function (name, time) {
+    house.getDeviceByName("LG").startWash("Хлопок", function (name, time, error) {
+        if (error) {
+            throw error;
+        }
         console.log(name + " закінчено! " + time + "хв вийшло!");
         house.getDeviceByName("LG").launchOff();
     });
-    house.getDeviceByName("LG").startWash("Хлопок", function (name, time) {
+    house.getDeviceByName("LG").startWash("Хлопок", function (name, time, error) {
+        if (error) {
+          throw error;
+        }
         console.log(name + " закінчено! " + time + "хв вийшло!");
         house.getDeviceByName("LG").launchOff();
     });
 } catch (error) {
-    console.log("Пральна машина вже працює! Неможливо запустити одночасно два прання!");
+    console.log(error.message);
 }
-
 
 console.log(house.getDeviceByName("LG").getModes());
 console.log(house.getDeviceByName('LG').getState());

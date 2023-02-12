@@ -70,16 +70,18 @@ Washer.prototype.startWash = function (name, callback) {
     //         throw new Error("Девайс вже працює!");
     //     }
     // }
-
+    var error;
+    var mode = this.getModeByName(name);
+    var time = mode.getTime();;
     if (this.__checkIfOn() && !this.__launch) {
         this.launchOn();
-        var mode = this.getModeByName(name);
         console.log("Пральна машина запущена!");
-        var time = mode.getTime();
-        setTimeout(function () {
-            callback(name, time);
-        }, (time * 100) / 3);
     }  else {
-        throw new Error();
+        error = new Error(
+          "Пральна машина вже працює! Неможливо запустити одночасно два прання!"
+        );
     }
+    setTimeout(function () {
+      callback(name, time, error);
+    }, (time * 100) / 3);
 }; 
